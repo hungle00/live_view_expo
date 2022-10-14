@@ -226,7 +226,7 @@ defmodule LiveViewExpo.Kanban do
       ** (Ecto.NoResultsError)
 
   """
-  def get_card!(id), do: Repo.get!(Card, id)
+  def get_card!(id), do: Repo.get!(Card, id) |> Repo.preload(column: :board)
 
   @doc """
   Creates a card.

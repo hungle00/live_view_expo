@@ -24,9 +24,11 @@ defmodule LiveViewExpoWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", LiveViewExpoWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", LiveViewExpoWeb.Api, as: :api do
+    pipe_through :api
+
+    put "/cards/:id", CardController, :update
+  end
 
   # Enables LiveDashboard only for development
   #

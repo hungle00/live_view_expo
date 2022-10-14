@@ -43,3 +43,13 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
+fetch('/api/cards/' + element.dataset.cardId, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    target_column_id: target.dataset.columnId
+  })
+}).then(_res => console.log('created!'))
+
