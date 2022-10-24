@@ -19,6 +19,7 @@ defmodule LiveViewExpoWeb.Router do
 
     get "/", PageController, :index
     live "/license", LicenseLive
+    live "/customers", CustomerLive
 
     get "/boards/:id", BoardController, :show
   end
