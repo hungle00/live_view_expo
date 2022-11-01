@@ -1,11 +1,11 @@
 defmodule LiveViewExpoWeb.CustomerLive do
   use LiveViewExpoWeb, :live_view
 
-  alias LiveViewExpo.Company.Customer
+  alias LiveViewExpo.Company
   @sort_cols ~w(customer_name contact_first_name contact_last_name city country credit_limit)
 
   def mount(_params, _session, socket) do
-    customers = Customer.list_customers()
+    customers = Company.list_customers(20)
 
     cols = [
       {"id","Id"}, {"customer_name","Customer"} , {"contact_first_name","First Name"} , {"contact_last_name","Last Name"}, {"phone" , "Phone"} ,
@@ -26,6 +26,14 @@ defmodule LiveViewExpoWeb.CustomerLive do
 
   def handle_params(_params, _uri, socket) do
     {:noreply, socket}
+  end
+
+  def handle_event("load-more", _params, socket) do
+    customers = socket.assigns.rows
+    latest_customer = Enum.max_by(customers, & &1.id)
+    more_customers = Company.list_customers(20, latest_customer.id)
+    customers = customers ++ more_customers
+    {:noreply, assign(socket, rows: customers)}
   end
 
   def sort_customers(customers, "customer_name") do

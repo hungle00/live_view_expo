@@ -1,6 +1,5 @@
 defmodule LiveViewExpo.Company.Customer do
   use Ecto.Schema
-  alias LiveViewExpo.Repo
 
   schema "customers" do
     field :customer_name, :string
@@ -16,9 +15,4 @@ defmodule LiveViewExpo.Company.Customer do
     field :credit_limit, :decimal
 
   end
-
-  def list_customers do
-    Repo.all( __MODULE__)
-  end
-
 end
