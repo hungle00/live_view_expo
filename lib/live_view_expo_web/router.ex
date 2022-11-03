@@ -21,6 +21,7 @@ defmodule LiveViewExpoWeb.Router do
     live "/license", LicenseLive
     live "/customers", CustomerLive
     live "/search", SearchLive
+    live "/chat", ChatLive
 
     get "/boards/:id", BoardController, :show
   end
